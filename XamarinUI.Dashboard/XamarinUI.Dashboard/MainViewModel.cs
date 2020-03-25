@@ -152,7 +152,6 @@ namespace XamarinUI.Dashboard
             {
                 OldPlanList = PlanList;
                 PlanList = SelectedMenu.Child;
-                //ImageBack.IsVisible = true;
                 SelectedMenu = new Menu();
             }
         });
@@ -169,17 +168,8 @@ namespace XamarinUI.Dashboard
             {
                 OldUserList = UserList;
                 UserList = SelectedMenuUser.Child;
-                //ImageBack.IsVisible = true;
-                //SelectedMenu = new Menu();
             }
         });
-
-        //public Command BackButtonChildItemCommand => new Command(() =>
-        //{
-        //    PlanList = OldPlanList;
-        //    //ImageBack.IsVisible = false;
-
-        //});
 
         #region Properties
 
@@ -274,13 +264,6 @@ namespace XamarinUI.Dashboard
             get { return _selectedMenuUser; }
         }
 
-        //private Image _imageBack;
-        //public Image ImageBack
-        //{
-        //    set { SetProperty(ref _imageBack, value); }
-        //    get { return _imageBack; }
-        //}
-
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -304,7 +287,6 @@ namespace XamarinUI.Dashboard
         public Menu()
         {
             Child = new ObservableCollection<Menu>();
-            Parent = new Menu();
         }
 
         public string Title { get; set; }
@@ -313,22 +295,18 @@ namespace XamarinUI.Dashboard
 
         public ObservableCollection<Menu> Child { get; private set; }
 
-        public new Menu Parent { get; private set; }
-
         public Menu AddChild(ObservableCollection<Menu> childrens)
         {
             var back = new Menu
             {
                 Title = "Back",
                 Icon = IconFont.AngleLeft,
-                BackgroundColor = Color.FromHex("#bdc3c7"),
-                Parent = this
+                BackgroundColor = Color.FromHex("#bdc3c7")
             };
 
             childrens.Insert(0, back);
 
             this.Child = childrens.ToObservableCollection();
-            
 
             return this;
         }
