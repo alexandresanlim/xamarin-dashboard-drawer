@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:XamarinUI.Dashboard"
+             xmlns:controls="clr-namespace:Xam.Plugin.SimpleBottomDrawer;assembly=Xam.Plugin.SimpleBottomDrawer"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             mc:Ignorable="d"
+             x:Class="XamarinUI.Dashboard.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <RelativeLayout>
+            <Grid>
+                <magic:GradientView Grid.Row="0">
+                    <magic:GradientView.GradientSource>
+                        <magic:LinearGradient Angle="180">
+                            <magic:GradientStop Color="{StaticResource primary}" Offset="0" />
+                            <magic:GradientStop Color="{StaticResource primary_dark}" Offset="0.65" />
+                            <magic:GradientStop Color="Black" Offset="1" />
+                        </magic:LinearGradient>
+                    </magic:GradientView.GradientSource>
+                </magic:GradientView>
+                <Grid RowSpacing="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.1*"/>
+                    </Grid.RowDefinitions>
+
+
+
+
+                    <!--Header-->
+                    <StackLayout BackgroundColor="Transparent" Grid.Row="0">
+
+                        <StackLayout Margin="15,40" Spacing="0">
+
+                            <Grid ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Frame Grid.Column="0" CornerRadius="100" 
+                               HeightRequest="60"
+                               WidthRequest="60"
+                        
+                               Padding="0"
+                               IsClippedToBounds="True"
+                               >
+                                    <Image Source="https://avatars1.githubusercontent.com/u/5353685?v=4" 
+                                   />
+                                </Frame>
+                                <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Alexandre Sanlim" FontAttributes="Bold" FontSize="Title" TextColor="{StaticResource icons}"/>
+                                    <Label Text="alexandresanlim.github.io" FontSize="Subtitle" TextColor="{StaticResource icons}"/>
+                                </StackLayout>
+                                <Image Grid.Column="2" VerticalOptions="Start">
+                                    <Image.Source>
+                                        <FontImageSource
+                                                                Color="{StaticResource icons}"
+                                                                FontFamily="{DynamicResource MaterialFontFamily}"
+                                                                Size="25"
+                                                                Glyph="&#xf0f3;"
+                                                                />
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+
+
+                        </StackLayout>
+
+                        <CollectionView SelectionMode="Single" Margin="10,0,0,0" BackgroundColor="Transparent" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedMenuUser}" SelectionChangedCommand="{Binding ChangeSelectedUserItemCommand}" PropertyChanged="CollectionView_PropertyChanged">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Grid.Column="0">
+                                            <Frame CornerRadius="15" Padding="18"  HeightRequest="70" WidthRequest="70" HasShadow="False" BackgroundColor="#80000000">
+                                                <Frame.Content>
+                                                    <StackLayout Spacing="0">
+                                                        <Image HorizontalOptions="StartAndExpand">
+                                                            <Image.Source>
+                                                                <FontImageSource
+                                                                Color="{StaticResource icons}"
+                                                                FontFamily="{DynamicResource MaterialFontFamily}"
+                                                                Size="25"
+                                                                Glyph="{Binding Icon}"
+                                                                />
+                                                            </Image.Source>
+                                                        </Image>
+                                                        <Label Text="{Binding Title}" MaxLines="1" LineBreakMode="TailTruncation" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource icons}" VerticalOptions="EndAndExpand"/>
+
+                                                        <!--<Label Text="{Binding Description}" FontSize="Body" TextColor="{StaticResource icons}" HorizontalOptions="Center" VerticalOptions="End" />-->
+                                                    </StackLayout>
+                                                </Frame.Content>
+                                            </Frame>
+                                        </StackLayout>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </StackLayout>
+
+                    <!--Body-->
+                    <StackLayout BackgroundColor="{StaticResource background_page}" Grid.Row="1" Spacing="15">
+                        <Frame CornerRadius="20" Margin="0,-50,0,-70" BackgroundColor="{StaticResource background_page}" HasShadow="False" HeightRequest="50"/>
+
+                        <StackLayout Padding="10,0">
+
+                            <CollectionView SelectionMode="Single" BackgroundColor="Transparent"  ItemsSource="{Binding PlanList}" SelectedItem="{Binding SelectedMenu}" SelectionChangedCommand="{Binding ChangeSelectedItemCommand}" PropertyChanged="CollectionView_PropertyChanged">
+
+
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="3" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="6">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackLayout Grid.Column="0">
+
+                                                <Frame CornerRadius="15"  HeightRequest="120" HasShadow="False" BackgroundColor="{Binding BackgroundColor}" Padding="5,15">
+                                                    <Frame.Content>
+                                                        <StackLayout Spacing="10" VerticalOptions="CenterAndExpand">
+
+                                                            <Image>
+                                                                <Image.Source>
+                                                                    <FontImageSource
+                                                                Color="{StaticResource icons}"
+                                                                FontFamily="{DynamicResource MaterialFontFamily}"
+                                                                Size="35"
+                                                                Glyph="{Binding Icon}"
+                                                                />
+                                                                </Image.Source>
+                                                            </Image>
+                                                            <Label Text="{Binding Title}" MaxLines="1" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="Subtitle" TextColor="{StaticResource icons}" HorizontalOptions="Center"/>
+                                                        </StackLayout>
+                                                    </Frame.Content>
+                                                </Frame>
+                                            </StackLayout>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </StackLayout>
+
+
+
+                </Grid>
+            </Grid>
+
+
+            <ContentView
+                BackgroundColor="#222222"
+                IsVisible="{Binding IsExpanded}"
+                Opacity="{Binding OverlayOpacity}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=1,
+                                                                       Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1,
+                                                                      Constant=0}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackgroundClicked}" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
+
+            <controls:BottomDrawer
+                Padding="0"
+                BackgroundColor="WhiteSmoke"
+                ExpandedPercentage="{Binding ExpandedPercentage}"
+                IsExpanded="{Binding IsExpanded}"
+                IsVisible="{Binding IsVisible}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=1,
+                                                                       Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1,
+                                                                      Constant=0}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=1,
+                                                                  Constant=-65}">
+
+                <StackLayout Spacing="0">
+                    <BoxView
+                        Margin="20,16,20,-5"
+                        BackgroundColor="Gray"
+                        CornerRadius="5"
+                        HeightRequest="3"
+                        HorizontalOptions="Center"
+                        WidthRequest="80" />
+
+                    <StackLayout Margin="16,0,0,0">
+
+                        <StackLayout Orientation="Horizontal">
+                            <Image>
+                                <Image.Source>
+                                    <FontImageSource
+                                        Color="{StaticResource primary_text}"
+                                        FontFamily="{DynamicResource MaterialFontFamily}"
+                                        Size="20"
+                                        Glyph="&#xf09e;"
+                                        />
+                                </Image.Source>
+                            </Image>
+                            <Label
+                        
+                        FontAttributes="Bold"
+                        FontSize="Subtitle"
+                        Text="Feed"
+                        TextColor="{StaticResource primary_text}" 
+                        />
+                        </StackLayout>
+
+                        <Label Text="Pull to show more"
+                
+                           TextColor="{StaticResource secondary_text}"
+                           />
+
+                        <BoxView
+                        BackgroundColor="{StaticResource divider}"
+                        HeightRequest="1"
+                        WidthRequest="500" />
+                    </StackLayout>
+                    
+                    <CollectionView ItemsSource="{Binding CurrentFeed}" Margin="0,0,0,150">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Spacing="0">
+                                    <Frame HasShadow="False" Margin="10" Padding="0" CornerRadius="15" BackgroundColor="White">
+
+                                        <StackLayout>
+                                            <Grid Padding="5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Frame CornerRadius="100" 
+                                           Grid.Column="0"
+                                           HeightRequest="60"
+                                           WidthRequest="60"
+                                           Padding="0"
+                                           IsClippedToBounds="True"
+                                                       HasShadow="False"
+                                           >
+                                                    <Image Source="{Binding AuthorImage}" 
+                                               />
+                                                </Frame>
+                                                <StackLayout Grid.Column="1" Spacing="0">
+                                                    <Label Text="{Binding Title}" FontSize="Title" TextColor="{StaticResource primary_text}" FontAttributes="Bold"/>
+                                                    <Label Text="{Binding Subtitle}" FontSize="Subtitle" TextColor="{StaticResource secondary_text}"/>
+                                                </StackLayout>
+
+                                            </Grid>
+
+                                            <Image Source="{Binding ImageUri}" />
+
+                                            <Label Text="{Binding Description}" Margin="10,0,0,0" FontSize="Body" TextColor="{StaticResource secondary_text}" MaxLines="2" LineBreakMode="TailTruncation" />
+
+                                            <StackLayout Padding="15" Orientation="Horizontal" HorizontalOptions="EndAndExpand" Spacing="15">
+                                                <Image>
+                                                    <Image.Source>
+                                                        <FontImageSource
+                                                    Color="{StaticResource secondary_text}"
+                                                    FontFamily="{DynamicResource MaterialFontFamily}"
+                                                    Size="25"
+                                                    Glyph="&#xf004;"
+                                                    />
+                                                    </Image.Source>
+                                                </Image>
+                                                <Image>
+                                                    <Image.Source>
+                                                        <FontImageSource
+                                                    Color="{StaticResource secondary_text}"
+                                                    FontFamily="{DynamicResource MaterialFontFamily}"
+                                                    Size="25"
+                                                    Glyph="&#xf1e0;"
+                                                    />
+                                                    </Image.Source>
+                                                </Image>
+                                            </StackLayout>
+                                        </StackLayout>
+
+
+                                    </Frame>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                  
+                </StackLayout>
+            </controls:BottomDrawer>
+
+        </RelativeLayout>
+
+
+
+    </ContentPage.Content>
+
+</ContentPage>
