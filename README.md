@@ -1,5 +1,5 @@
 # XamarinUI.DashboardDrawer
-It's a subscription plan app xamarin ui sample ;)
+It's a dashboard with drawer Xamarin UI ;)
 
 ## Screenshots
 
