@@ -8,8 +8,8 @@ Android | iOS
 <img width="230" src="https://github.com/alexandresanlim/XamarinUI.Dashboard/blob/master/XamarinUI.Dashboard/XamarinUI.Dashboard/Src/Img/Screen/android.gif?raw=true"/>| <img width="230" src="https://github.com/alexandresanlim/XamarinUI.Dashboard/blob/master/XamarinUI.Dashboard/XamarinUI.Dashboard/Src/Img/Screen/ios.png?raw=true"/>
 
 ## Dependencies Packages:
-<a href="" target="_blank">Magic Gradients</a> for top gradient effect <br/>
-<a href="" target="_blank">Xam.Plugin.SimpleBottomDrawer</a> for bottom drawer feed effect
+<a href="https://github.com/mgierlasinski/MagicGradients" target="_blank">Magic Gradients</a> for top gradient effect <br/>
+<a href="https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer" target="_blank">Xam.Plugin.SimpleBottomDrawer</a> for bottom drawer feed effect
 
 #### You can remove it for your use
 
