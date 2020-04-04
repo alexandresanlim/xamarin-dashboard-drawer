@@ -142,7 +142,7 @@
 
                                                 <Frame CornerRadius="15"  HeightRequest="120" HasShadow="False" BackgroundColor="{Binding BackgroundColor}" Padding="5,15">
                                                     <Frame.Content>
-                                                        <StackLayout Spacing="10" VerticalOptions="CenterAndExpand">
+                                                        <StackLayout Spacing="10" VerticalOptions="CenterAndExpand" Padding="10">
 
                                                             <Image>
                                                                 <Image.Source>
@@ -154,7 +154,7 @@
                                                                 />
                                                                 </Image.Source>
                                                             </Image>
-                                                            <Label Text="{Binding Title}" MaxLines="1" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="Subtitle" TextColor="{StaticResource icons}" HorizontalOptions="Center"/>
+                                                            <Label Text="{Binding Title}" MaxLines="1" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="Medium" TextColor="{StaticResource icons}" HorizontalOptions="Center"/>
                                                         </StackLayout>
                                                     </Frame.Content>
                                                 </Frame>
