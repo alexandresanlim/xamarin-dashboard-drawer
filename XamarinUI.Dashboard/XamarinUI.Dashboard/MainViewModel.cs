@@ -60,7 +60,7 @@ namespace XamarinUI.Dashboard
                 },
             };
 
-            PlanList = new ObservableCollection<Menu>
+            BodyList = new ObservableCollection<Menu>
             {
                 new Menu
                 {
@@ -144,14 +144,14 @@ namespace XamarinUI.Dashboard
         {
             if (!string.IsNullOrEmpty(SelectedMenu?.Title) && SelectedMenu.Title.Equals(TitleBack))
             {
-                PlanList = OldPlanList;
+                BodyList = OldBodyList;
                 return;
             }
 
             if (!SelectedMenu.Child.Count.Equals(0))
             {
-                OldPlanList = PlanList;
-                PlanList = SelectedMenu.Child;
+                OldBodyList = BodyList;
+                BodyList = SelectedMenu.Child;
                 SelectedMenu = new Menu();
             }
         });
@@ -215,18 +215,18 @@ namespace XamarinUI.Dashboard
             set => SetProperty(ref _OverlayOpacity, value);
         }
 
-        private ObservableCollection<Menu> _OldPlanList;
-        public ObservableCollection<Menu> OldPlanList
+        private ObservableCollection<Menu> _oldBodyList;
+        public ObservableCollection<Menu> OldBodyList
         {
-            set { SetProperty(ref _OldPlanList, value); }
-            get { return _OldPlanList; }
+            set { SetProperty(ref _oldBodyList, value); }
+            get { return _oldBodyList; }
         }
 
-        private ObservableCollection<Menu> _planList;
-        public ObservableCollection<Menu> PlanList
+        private ObservableCollection<Menu> _bodyList;
+        public ObservableCollection<Menu> BodyList
         {
-            set { SetProperty(ref _planList, value); }
-            get { return _planList; }
+            set { SetProperty(ref _bodyList, value); }
+            get { return _bodyList; }
         }
 
         private ObservableCollection<Menu> _userList;
