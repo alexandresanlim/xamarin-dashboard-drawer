@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
+using XamarinUI.Dashboard.Models;
 
 namespace XamarinUI.Dashboard.Extention
 {
@@ -35,7 +36,7 @@ namespace XamarinUI.Dashboard.Extention
             return HexFlatColors.PickRandom();
         }
 
-        public static ObservableCollection<Menu> SetColorInMenuList(this ObservableCollection<Menu> source)
+        public static List<MenuBody> SetColorInMenuList(this List<MenuBody> source)
         {
             var count = 0;
             var lastColor = HexFlatColors.LastOrDefault();

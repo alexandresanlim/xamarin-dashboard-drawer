@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinUI.Dashboard.Extention;
+using XamarinUI.Dashboard.Models;
 
 namespace XamarinUI.Dashboard
 {
@@ -19,97 +20,9 @@ namespace XamarinUI.Dashboard
         {
             BackgroundClicked = new Command(() => IsExpanded = false);
 
-            UserList = new ObservableCollection<Menu>
-            {
-                new Menu
-                {
-                    Title = "Address",
-                    Icon = IconFont.MapMarkedAlt,
-                },
-                new Menu
-                {
-                    Title = "Credit Cards",
-                    Icon = IconFont.CreditCard,
-                },
-                new Menu
-                {
-                    Title = "Favorites",
-                    Icon = IconFont.Star
-                }.AddChild(new ObservableCollection<Menu>
-                    {
-                        new Menu
-                        {
-                            Title = "Products",
-                            Icon = IconFont.Guitar
-                        },
-                        new Menu
-                        {
-                            Title = "Services",
-                            Icon = IconFont.Taxi
-                        },
-                    }),
-                new Menu
-                {
-                    Title = "Wallets",
-                    Icon = IconFont.Wallet,
-                },
-                new Menu
-                {
-                    Title = "Logout",
-                    Icon = IconFont.SignOutAlt,
-                },
-            };
+            LoadUserMenu();
 
-            BodyList = new ObservableCollection<Menu>
-            {
-                new Menu
-                {
-                    Title = "Categories",
-                    Icon = IconFont.ShoppingBag
-                }.AddChild(new ObservableCollection<Menu>
-                    {
-                        new Menu
-                        {
-                            Title = "Japonese",
-                            //Icon = IconFont.List
-                        },
-                        new Menu
-                        {
-                            Title = "Italian",
-                            //Icon = IconFont.List
-                        },
-                        new Menu
-                        {
-                            Title = "Brazilian",
-                            //Icon = IconFont.List
-                        }
-                    }.SetColorInMenuList()),
-                new Menu
-                {
-                    Title = "Near",
-                    Icon = IconFont.MapMarkedAlt,
-                },
-                new Menu
-                {
-                    Title = "Famous",
-                    Icon = IconFont.Star,
-                },
-                new Menu
-                {
-                    Title = "Promotion",
-                    Icon = IconFont.Heart,
-                },
-                new Menu
-                {
-                    Title = "Subscription",
-                    Icon = IconFont.FileSignature,
-                },
-                new Menu
-                {
-                    Title = "About App",
-                    Icon = IconFont.Code,
-                },
-            }.SetColorInMenuList();
+            LoadBodyMenu();
 
             CurrentFeed = new ObservableCollection<Feed>
             {
@@ -140,34 +53,134 @@ namespace XamarinUI.Dashboard
             };
         }
 
+        private void LoadUserMenu()
+        {
+            UserList = new ObservableCollection<MenuBody>
+            {
+                new MenuBody
+                {
+                    Text = "Address",
+                    Icon = IconFont.MapMarkedAlt,
+                },
+                new MenuBody
+                {
+                    Text = "Credit Cards",
+                    Icon = IconFont.CreditCard,
+                },
+                new MenuBody
+                {
+                    Text = "Favorites",
+                    Icon = IconFont.Star
+                }.AddChild(new List<MenuBody>
+                    {
+                        new MenuBody
+                        {
+                            Text = "Products",
+                            Icon = IconFont.Guitar
+                        },
+                        new MenuBody
+                        {
+                            Text = "Services",
+                            Icon = IconFont.Taxi
+                        },
+                    }),
+                new MenuBody
+                {
+                    Text = "Wallets",
+                    Icon = IconFont.Wallet,
+                },
+                new MenuBody
+                {
+                    Text = "Logout",
+                    Icon = IconFont.SignOutAlt,
+                },
+            };
+        }
+
+        private void LoadBodyMenu()
+        {
+            var bodyMenu = new List<MenuBody>
+            {
+                new MenuBody
+                {
+                    Text = "Categories",
+                    Icon = IconFont.ShoppingBag
+                }.AddChild(new List<MenuBody>
+                    {
+                        new MenuBody
+                        {
+                            Text = "Japonese",
+                            //Icon = IconFont.List
+                        },
+                        new MenuBody
+                        {
+                            Text = "Italian",
+                            //Icon = IconFont.List
+                        },
+                        new MenuBody
+                        {
+                            Text = "Brazilian",
+                            //Icon = IconFont.List
+                        }
+                    }),
+                new MenuBody
+                {
+                    Text = "Near",
+                    Icon = IconFont.MapMarkedAlt,
+                },
+                new MenuBody
+                {
+                    Text = "Famous",
+                    Icon = IconFont.Star,
+                },
+                new MenuBody
+                {
+                    Text = "Promotion",
+                    Icon = IconFont.Heart,
+                },
+                new MenuBody
+                {
+                    Text = "Subscription",
+                    Icon = IconFont.FileSignature,
+                },
+                new MenuBody
+                {
+                    Text = "About App",
+                    Icon = IconFont.Code,
+                },
+            }.SetColorInMenuList();
+
+            BodyList = bodyMenu.ToObservableCollection();
+        }
+
         public Command ChangeSelectedItemCommand => new Command(() =>
         {
-            if (!string.IsNullOrEmpty(SelectedMenu?.Title) && SelectedMenu.Title.Equals(TitleBack))
+            if (!string.IsNullOrEmpty(SelectedMenu?.Text) && SelectedMenu.Text.Equals(TitleBack))
             {
-                BodyList = OldBodyList;
+                BodyList = OldBodyList.ToObservableCollection();
                 return;
             }
 
             if (!SelectedMenu.Child.Count.Equals(0))
             {
-                OldBodyList = BodyList;
-                BodyList = SelectedMenu.Child;
-                SelectedMenu = new Menu();
+                OldBodyList = BodyList.ToList();
+                BodyList = SelectedMenu.Child.ToObservableCollection();
+                SelectedMenu = new MenuBody();
             }
         });
 
         public Command ChangeSelectedUserItemCommand => new Command(() =>
         {
-            if (!string.IsNullOrEmpty(SelectedMenuUser?.Title) && SelectedMenuUser.Title.Equals(TitleBack))
+            if (!string.IsNullOrEmpty(SelectedMenuUser?.Text) && SelectedMenuUser.Text.Equals(TitleBack))
             {
-                UserList = OldUserList;
+                UserList = OldUserList.ToObservableCollection();
                 return;
             }
 
             if (!SelectedMenuUser.Child.Count.Equals(0))
             {
-                OldUserList = UserList;
-                UserList = SelectedMenuUser.Child;
+                OldUserList = UserList.ToList();
+                UserList = SelectedMenuUser.Child.ToObservableCollection();
             }
         });
 
@@ -215,33 +228,23 @@ namespace XamarinUI.Dashboard
             set => SetProperty(ref _OverlayOpacity, value);
         }
 
-        private ObservableCollection<Menu> _oldBodyList;
-        public ObservableCollection<Menu> OldBodyList
-        {
-            set { SetProperty(ref _oldBodyList, value); }
-            get { return _oldBodyList; }
-        }
+        public List<MenuBody> OldBodyList { get; set; }
 
-        private ObservableCollection<Menu> _bodyList;
-        public ObservableCollection<Menu> BodyList
+        private ObservableCollection<MenuBody> _bodyList;
+        public ObservableCollection<MenuBody> BodyList
         {
             set { SetProperty(ref _bodyList, value); }
             get { return _bodyList; }
         }
 
-        private ObservableCollection<Menu> _userList;
-        public ObservableCollection<Menu> UserList
+        private ObservableCollection<MenuBody> _userList;
+        public ObservableCollection<MenuBody> UserList
         {
             set { SetProperty(ref _userList, value); }
             get { return _userList; }
         }
 
-        private ObservableCollection<Menu> _oldUserList;
-        public ObservableCollection<Menu> OldUserList
-        {
-            set { SetProperty(ref _oldUserList, value); }
-            get { return _oldUserList; }
-        }
+        public List<MenuBody> OldUserList { get; set; }
 
         private ObservableCollection<Feed> _currentFeed;
         public ObservableCollection<Feed> CurrentFeed
@@ -250,15 +253,15 @@ namespace XamarinUI.Dashboard
             get { return _currentFeed; }
         }
 
-        private Menu _selectedMenu;
-        public Menu SelectedMenu
+        private MenuBody _selectedMenu;
+        public MenuBody SelectedMenu
         {
             set { SetProperty(ref _selectedMenu, value); }
             get { return _selectedMenu; }
         }
 
-        private Menu _selectedMenuUser;
-        public Menu SelectedMenuUser
+        private MenuBody _selectedMenuUser;
+        public MenuBody SelectedMenuUser
         {
             set { SetProperty(ref _selectedMenuUser, value); }
             get { return _selectedMenuUser; }
@@ -280,48 +283,5 @@ namespace XamarinUI.Dashboard
         }
 
         #endregion
-    }
-
-    public class Menu : View
-    {
-        public Menu()
-        {
-            Child = new ObservableCollection<Menu>();
-        }
-
-        public string Title { get; set; }
-
-        public string Icon { get; set; }
-
-        public ObservableCollection<Menu> Child { get; private set; }
-
-        public Menu AddChild(ObservableCollection<Menu> childrens)
-        {
-            var back = new Menu
-            {
-                Title = "Back",
-                Icon = IconFont.AngleLeft,
-                BackgroundColor = Color.FromHex("#bdc3c7")
-            };
-
-            childrens.Insert(0, back);
-
-            this.Child = childrens.ToObservableCollection();
-
-            return this;
-        }
-    }
-
-    public class Feed
-    {
-        public string Title { get; set; }
-
-        public string Subtitle { get; set; }
-
-        public string ImageUri { get; set; }
-
-        public string AuthorImage { get; set; }
-
-        public string Description { get; set; }
     }
 }

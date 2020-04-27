@@ -99,7 +99,7 @@
                                                                 />
                                                             </Image.Source>
                                                         </Image>
-                                                        <Label Text="{Binding Title}" MaxLines="1" LineBreakMode="TailTruncation" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource icons}" VerticalOptions="EndAndExpand"/>
+                                                        <Label Text="{Binding Text}" MaxLines="1" LineBreakMode="TailTruncation" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource icons}" VerticalOptions="EndAndExpand"/>
 
                                                         <!--<Label Text="{Binding Description}" FontSize="Body" TextColor="{StaticResource icons}" HorizontalOptions="Center" VerticalOptions="End" />-->
                                                     </StackLayout>
@@ -149,12 +149,12 @@
                                                                     <FontImageSource
                                                                 Color="{StaticResource icons}"
                                                                 FontFamily="{DynamicResource MaterialFontFamily}"
-                                                                Size="35"
+                                                                Size="30"
                                                                 Glyph="{Binding Icon}"
                                                                 />
                                                                 </Image.Source>
                                                             </Image>
-                                                            <Label Text="{Binding Title}" MaxLines="1" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="Medium" TextColor="{StaticResource icons}" HorizontalOptions="Center"/>
+                                                            <Label Text="{Binding Text}" MaxLines="1" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="Body" TextColor="{StaticResource icons}" HorizontalOptions="Center"/>
                                                         </StackLayout>
                                                     </Frame.Content>
                                                 </Frame>
