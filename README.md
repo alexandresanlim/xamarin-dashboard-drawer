@@ -1,6 +1,3 @@
-# XamarinUI.DashboardDrawer
-It's a dashboard with drawer Xamarin UI ;)
-
 ## Screenshots
 
 Android | iOS
