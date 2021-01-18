@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:XamarinUI.Dashboard"
              xmlns:controls="clr-namespace:Xam.Plugin.SimpleBottomDrawer;assembly=Xam.Plugin.SimpleBottomDrawer"
-             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
              mc:Ignorable="d"
              x:Class="XamarinUI.Dashboard.MainPage">
 
@@ -15,146 +14,89 @@
 
     <ContentPage.Content>
         <RelativeLayout>
-            <Grid>
-                <magic:GradientView>
-                    <magic:GradientView.GradientSource>
-                        <magic:LinearGradient Angle="180">
-                            <magic:GradientStop Color="{StaticResource primary}" Offset="0" />
-                            <magic:GradientStop Color="{StaticResource primary_dark}" Offset="0.65" />
-                            <magic:GradientStop Color="Black" Offset="1" />
-                        </magic:LinearGradient>
-                    </magic:GradientView.GradientSource>
-                </magic:GradientView>
-                <Grid RowSpacing="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.1*"/>
-                    </Grid.RowDefinitions>
+            <ScrollView BackgroundColor="Black">
+                <Frame Padding="0">
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="Black" Offset="0" />
+                            <GradientStop Color="{DynamicResource primary_dark}" Offset="0.65" />
+                            <GradientStop Color="{DynamicResource primary}" Offset="1" />
+                        </LinearGradientBrush>
 
-                    <!--Header-->
-                    <StackLayout BackgroundColor="Transparent" Grid.Row="0">
+                    </Frame.Background>
 
-                        <StackLayout Margin="15,40" Spacing="0">
+                    <StackLayout>
 
-                            <Grid ColumnSpacing="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
+                        <!--Header-->
+                        <StackLayout BackgroundColor="Transparent" Grid.Row="0" Spacing="0">
 
-                                <Frame Grid.Column="0" CornerRadius="100" 
+                            <StackLayout Margin="15" Spacing="0">
+
+                                <Grid ColumnSpacing="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Frame Grid.Column="0" CornerRadius="100" 
                                        HeightRequest="60"
                                        WidthRequest="60"
                                        Padding="0"
                                        IsClippedToBounds="True"
                                        >
-                                    <Image Source="https://avatars1.githubusercontent.com/u/5353685?v=4" />
-                                </Frame>
-                                <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="CenterAndExpand">
-                                    <Label Text="Alexandre Sanlim" FontAttributes="Bold" FontSize="Title" TextColor="{StaticResource icons}"/>
-                                    <Label Text="alexandresanlim.github.io" FontSize="Subtitle" TextColor="{StaticResource icons}"/>
-                                </StackLayout>
-                                <Image Grid.Column="2" VerticalOptions="Start">
-                                    <Image.Source>
-                                        <FontImageSource
+                                        <Image Source="https://avatars1.githubusercontent.com/u/5353685?v=4" />
+                                    </Frame>
+                                    <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="CenterAndExpand">
+                                        <Label Text="Alexandre Sanlim" FontAttributes="Bold" FontSize="Title" TextColor="{StaticResource icons}"/>
+                                        <Label Text="alexandresanlim.github.io" FontSize="Subtitle" TextColor="{StaticResource icons}"/>
+                                    </StackLayout>
+                                    <Image Grid.Column="2" VerticalOptions="Start">
+                                        <Image.Source>
+                                            <FontImageSource
                                                                 Color="{StaticResource icons}"
                                                                 FontFamily="{DynamicResource MaterialFontFamily}"
                                                                 Size="25"
                                                                 Glyph="&#xf0f3;"
                                                                 />
-                                    </Image.Source>
-                                </Image>
-                            </Grid>
+                                        </Image.Source>
+                                    </Image>
+                                </Grid>
 
 
-                        </StackLayout>
+                            </StackLayout>
 
-                        <CollectionView SelectionMode="Single" BackgroundColor="Transparent" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedMenuUser}" SelectionChangedCommand="{Binding ChangeSelectedUserItemCommand}" PropertyChanged="CollectionView_PropertyChanged">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Padding="5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <StackLayout Grid.Column="0">
-                                            <Frame CornerRadius="15" Padding="18"  HeightRequest="70" WidthRequest="70" HasShadow="False" BackgroundColor="#80000000">
-                                                <Frame.Content>
-                                                    <StackLayout Spacing="0">
-                                                        <Image HorizontalOptions="StartAndExpand">
-                                                            <Image.Source>
-                                                                <FontImageSource
-                                                                Color="{StaticResource icons}"
-                                                                FontFamily="{DynamicResource MaterialFontFamily}"
-                                                                Size="25"
-                                                                Glyph="{Binding Icon}"
-                                                                />
-                                                            </Image.Source>
-                                                        </Image>
-                                                        <Label Text="{Binding Text}" MaxLines="1" LineBreakMode="TailTruncation" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource icons}" VerticalOptions="EndAndExpand"/>
-
-                                                        <!--<Label Text="{Binding Description}" FontSize="Body" TextColor="{StaticResource icons}" HorizontalOptions="Center" VerticalOptions="End" />-->
-                                                    </StackLayout>
-                                                </Frame.Content>
-                                            </Frame>
-                                        </StackLayout>
-
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-
-                    </StackLayout>
-
-                    <!--Body-->
-                    <StackLayout BackgroundColor="{StaticResource background_page}" Grid.Row="1" Spacing="15">
-                        <Frame CornerRadius="20" Margin="0,-50,0,-70" BackgroundColor="{StaticResource background_page}" HasShadow="False" HeightRequest="50"/>
-
-                        <StackLayout Padding="10,0">
-
-                            <CollectionView 
-                                SelectionMode="Single" 
-                                BackgroundColor="Transparent"  
-                                ItemsSource="{Binding BodyList}" 
-                                SelectedItem="{Binding SelectedMenu}" 
-                                SelectionChangedCommand="{Binding ChangeSelectedItemCommand}" 
-                                PropertyChanged="CollectionView_PropertyChanged">
-
+                            <CollectionView SelectionMode="Single" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedMenuUser}" SelectionChangedCommand="{Binding ChangeSelectedUserItemCommand}" PropertyChanged="CollectionView_PropertyChanged" HeightRequest="140">
                                 <CollectionView.ItemsLayout>
-                                    <GridItemsLayout Orientation="Vertical" Span="3" />
+                                    <LinearItemsLayout Orientation="Horizontal"/>
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Padding="6">
+                                        <Grid Padding="5">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <StackLayout Grid.Column="0">
-
-                                                <Frame CornerRadius="15"  HeightRequest="120" HasShadow="False" BackgroundColor="{Binding BackgroundColor}" Padding="5,15">
+                                                <Frame CornerRadius="15" Padding="18"  HeightRequest="70" WidthRequest="70" HasShadow="False" BackgroundColor="#80000000">
                                                     <Frame.Content>
-                                                        <StackLayout Spacing="10" VerticalOptions="CenterAndExpand" Padding="10">
-
-                                                            <Image>
+                                                        <StackLayout Spacing="0">
+                                                            <Image HorizontalOptions="StartAndExpand">
                                                                 <Image.Source>
                                                                     <FontImageSource
                                                                 Color="{StaticResource icons}"
                                                                 FontFamily="{DynamicResource MaterialFontFamily}"
-                                                                Size="30"
+                                                                Size="25"
                                                                 Glyph="{Binding Icon}"
                                                                 />
                                                                 </Image.Source>
                                                             </Image>
-                                                            <Label Text="{Binding Text}" MaxLines="1" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="Body" TextColor="{StaticResource icons}" HorizontalOptions="Center"/>
+                                                            <Label Text="{Binding Text}" MaxLines="1" LineBreakMode="TailTruncation" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource icons}" VerticalOptions="EndAndExpand"/>
+
+                                                            <!--<Label Text="{Binding Description}" FontSize="Body" TextColor="{StaticResource icons}" HorizontalOptions="Center" VerticalOptions="End" />-->
                                                         </StackLayout>
                                                     </Frame.Content>
                                                 </Frame>
@@ -164,13 +106,67 @@
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
+
                         </StackLayout>
+
+                        <!--Body-->
+                        <Grid BackgroundColor="{StaticResource background_page}" Grid.Row="1">
+                            <Frame CornerRadius="20" Margin="0,-20,0,0" BackgroundColor="{DynamicResource background_page}" HasShadow="False"/>
+
+                            <StackLayout Padding="10,0" BackgroundColor="{DynamicResource background_page}">
+
+                                <CollectionView 
+                                SelectionMode="Single"
+                                ItemsSource="{Binding BodyList}" 
+                                SelectedItem="{Binding SelectedMenu}" 
+                                SelectionChangedCommand="{Binding ChangeSelectedItemCommand}" 
+                                PropertyChanged="CollectionView_PropertyChanged">
+
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Vertical" Span="3" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Padding="6">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackLayout Grid.Column="0">
+
+                                                    <Frame CornerRadius="15"  HeightRequest="120" HasShadow="False" BackgroundColor="{Binding BackgroundColor}" Padding="5,15">
+                                                        <Frame.Content>
+                                                            <StackLayout Spacing="10" VerticalOptions="CenterAndExpand" Padding="10">
+
+                                                                <Image>
+                                                                    <Image.Source>
+                                                                        <FontImageSource
+                                                                            Color="{StaticResource icons}"
+                                                                            FontFamily="{DynamicResource MaterialFontFamily}"
+                                                                            Size="30"
+                                                                            Glyph="{Binding Icon}"
+                                                                            />
+                                                                    </Image.Source>
+                                                                </Image>
+                                                                <Label Text="{Binding Text}" MaxLines="1" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="Body" TextColor="{StaticResource icons}" HorizontalOptions="Center"/>
+                                                            </StackLayout>
+                                                        </Frame.Content>
+                                                    </Frame>
+                                                </StackLayout>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </Grid>
+
+
+
+                        <!--</Grid>-->
                     </StackLayout>
-
-
-
-                </Grid>
-            </Grid>
+                </Frame>
+            </ScrollView>
 
 
             <ContentView
