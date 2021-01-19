@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms.Platform.Android;
 
 namespace XamarinUI.Dashboard.Droid
 {
@@ -14,8 +15,10 @@ namespace XamarinUI.Dashboard.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
+            //TabLayoutResource = Resource.Layout.Tabbar;
+            //ToolbarResource = Resource.Layout.Toolbar;
+
+            this.SetStatusBarColor(Xamarin.Forms.Color.Black.ToAndroid());
 
             base.OnCreate(savedInstanceState);
 
